@@ -1,0 +1,22 @@
+django-admin startproject core .   python -m django startproject core .
+django-admin startapp blog
+virtualenv venv                     python -m virtualenv venv
+.\venv\Scripts\activate
+
+pip install django
+sanal cihazı başlat 
+python manage.py migrate    
+python manage.py createsuperuser
+
+python manage.py runserver          projeyi başlat 
+
+
+python manage.py makemigrations
+python manage.py migrate
+
+pip install djangorestframework
+pip install django-extensions
+
+.\guldeniz-venv\Scripts\activate
+
+python3 manage.py runserver 0.0.0.0:8010

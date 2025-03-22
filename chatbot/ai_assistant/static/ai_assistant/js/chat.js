@@ -1,11 +1,4 @@
-
-
-document.getElementById('message-input').addEventListener('keydown', function (event) {
-  if (event.key === 'Enter') {
-    event.preventDefault();
-    sendMessage();
-  }
-});
+//  soruların tıklanabilir hale getirilmesi
 document.querySelectorAll('.example-question').forEach(function(question) {
   question.addEventListener('click', function() {
       var messageText = question.textContent.trim();
@@ -14,41 +7,60 @@ document.querySelectorAll('.example-question').forEach(function(question) {
 });
 
 
-function sendMessage() {
+function sendMessage(messageText = '') {
   var messageInput = document.getElementById('message-input');
-  var messageText = messageInput.innerText.trim();  
-  if (messageText !== '') {
-      var messagesContent = document.querySelector('.messages-content');
+  if (messageText === '') {
+      messageText = messageInput.value.trim();
+  }
 
-      // Kullanıcı mesajını ekle
+  if (messageText !== '') {
+      var messagesContent = document.getElementById('messages-content');
+      
       var newMessage = document.createElement('div');
       newMessage.classList.add('message');
       newMessage.innerHTML = '<div class="message-content">' + messageText + '</div>';
+      
       messagesContent.appendChild(newMessage);
-
-      // Kullanıcı mesajı gönderildikten sonra input alanını temizle
-      messageInput.innerHTML = '';
-
-      messagesContent.scrollTop = messagesContent.scrollHeight;
+      
+      messageInput.value = '';
+      var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
       $.ajax({
-          url: 'api/get-answer', // Backend URL veya API endpoint
-          method: 'POST',
-          data: JSON.stringify({ "message": messageText }),
-          contentType: 'application/json',
-          success: function(response) {
-              // Backend cevabını ekle
-              var botMessage = document.createElement('div');
-              botMessage.classList.add('message', 'bot');
-              botMessage.innerHTML = '<div class="message-content">' + response.answer + '</div>';
-              messagesContent.appendChild(botMessage);
-
-              // Mesaj kutusunun en altına kaydırma
-              messagesContent.scrollTop = messagesContent.scrollHeight;
+        url: 'api/get-answer', 
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrfToken,
+            'Content-Type': 'application/json',
           },
-          error: function() {
-              console.log('Mesaj gönderilemedi.');
-          }
-      });
+        data: JSON.stringify({ "message": messageText }),
+        contentType: 'application/json',
+        success: function(response) {
+
+          var botMessage = document.createElement('div');
+            botMessage.classList.add('answer', 'bot');
+            botMessage.innerHTML = '<div class="message-content">' + response.answer + '</div>';
+            messagesContent.appendChild(botMessage);
+            scrollToBottom()
+        },
+        error: function() {
+            console.log('Mesaj gönderilemedi.');
+        }
+    });
+      
   }
+
+ 
+}
+
+// Enter tuşu ile mesaj gönderme
+document.getElementById('message-input').addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+      event.preventDefault();  
+      sendMessage();  
+      scrollToBottom()
+  }
+});
+function scrollToBottom() {
+  var messages = document.getElementById("messages-content");
+  messages.scrollTop = messages.scrollHeight;
 }

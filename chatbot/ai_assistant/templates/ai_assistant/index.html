@@ -5,6 +5,8 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
     <title>Chatbot Ana Sayfa</title>
     <link rel="stylesheet" href="{% static 'ai_assistant/css/chat.css' %}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
@@ -24,7 +26,7 @@
             <div class="messages">
                 <div class="messages-content" id="messages-content">
                     <div class="mt-1">
-                        <h4 style="padding: 20px;">Lütfen mesaj atın</h4>
+                        <h4 style="padding: 20px;">Size nasıl yardımcı olabilirim?</h4>
                     </div>
                 </div>
 

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
+    <title>Chatbot Ana Sayfa</title>
+    <link rel="stylesheet" href="{% static 'ai_assistant/css/chat.css' %}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="row">
+        <div class="chat col-md-4 m-5">
+            <div class="chat-title">
+                <h1>Kullanıcı Adı</h1>
+                <h2>Nitelik</h2>
+                <figure class="avatar">
+                    <img src=" {% static 'ai_assistant/images/profile-default.png' %} " />
+                </figure>
+            </div>
+            <div class="messages">
+                <div class="messages-content" id="messages-content">
+                    <div class="mt-1">
+                        <h4 style="padding: 20px;">Size nasıl yardımcı olabilirim?</h4>
+                    </div>
+                </div>
+
+            </div>
+            <div class="message-box">
+                <textarea id="message-input" class="message-input" placeholder="Mesaj Yaz..." rows="1"></textarea>
+                <button type="button" class="message-submit" onclick="sendMessage()">Gönder</button>
+            </div>
+            
+
+        </div>
+        <div class="response col-md-6 m-5"
+            style="border-color: aqua; border-width: 2px; padding: 20px; border-radius: 10px;">
+            <h3 style="text-align: center;">Örnek Sorular</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <span class="example-question">Bugünün satış sayısı nedir?</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="example-question">Yarınki hava durumu nasıl olacak?</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="example-question">Bana son 7 gündeki satışları göster.</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="example-question">Müşteri destek ekibiyle nasıl iletişime geçebilirim?</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="example-question">Son 30 gün içinde en çok satan ürünler hangileri?</span>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <span class="example-question">En son siparişin durumu nedir?</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="example-question">Bu ayki gelir ne kadar oldu?</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="example-question"> Bugün kaç yeni kullanıcı kaydoldu?</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="example-question"> Siparişimi nasıl takip edebilirim?</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="example-question">Son 7 gündeki en fazla sipariş edilen ürünler nedir? </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'ai_assistant/js/chat.js' %}"></script>
+
+</html>
